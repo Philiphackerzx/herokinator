@@ -1,0 +1,15 @@
+
+i=`cat install.io`
+if [ $i -eq 0 ];
+then
+pkg install nodejs python wget
+pip install twilio flask gunicorn
+npm i -g heroku
+mkdir /sdcard/download/www.philiphacker.in
+mkdir /sdcard/download/www.philiphacker.in/herokinator/
+echo "HEROKINATOR - www.philiphacker.in" > /sdcard/download/www.philiphacker.in/herokinator/db.io
+echo 1 > install.io
+sh herokinator
+else
+sh herokinator
+fi

@@ -1,0 +1,41 @@
+import os
+import time
+def UserChoice():
+    os.system("clear")
+    os.system("cd /sdcard/download/www.philiphacker.in/herokinator && ls -d */ > data.io")
+    a = open("/sdcard/download/www.philiphacker.in/herokinator/data.io","r")
+    b = a.readlines()
+    a.close()
+    x=0
+    print("\n")
+    for i in b:
+        x=x+1
+    if x==0:
+        os.system("clear")
+        print("\n\nYou don't have any app yet !")
+    else:
+        y=0
+        print("Your App List,\n\n")
+        print("99 - Go Back")
+        while True:
+            if x==y:
+                break
+            else:
+                print(" "+str(y)+" - "+b[y].strip().replace("/",""))
+                y=y+1
+    print("\n")
+    choice = int(input("Enter your choice : "))
+    if choice in range(len(b)):
+        loaditem = b[choice].replace("/","")
+        appload = open("/sdcard/download/www.philiphacker.in/herokinator/temp.io","w")
+        load = appload.write(loaditem)
+        appload.close()
+        os.system("sh github")
+    elif choice == 99:
+        os.system("sh herokinator")
+    else:
+        print ("Invalid Input !")
+        time.sleep(0.3)
+        os.system("sh herokinator")
+
+UserChoice()
