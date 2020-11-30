@@ -1,0 +1,169 @@
+db=`cat /sdcard/download/www.philiphacker.in/herokinator/db.io`
+no='\033[1;33m'
+up='\033[1;32m'
+nc='\033[0m'
+title="HEROKINATOR - www.philiphacker.in"
+if [ "$db" = "$title" ]
+then
+clear
+printf "\n\n"
+printf "${no}$db "
+printf "\n\n\n${nc}  Do you have a python file ?"
+printf "\n  want to run for unlimited time?"
+printf "\n  want to run for 24×7 ?"
+printf "\n  for free ? Then,"
+printf "\n  Herokinator is the solution for you !"
+printf "\n\n\n"
+printf "${no}  1 - ${nc}NEW \n"
+printf "${no}  2 - ${nc}OPEN \n"
+printf "${no}  3 - ${nc}HELP \n"
+printf "${no}  4 - ${nc}UPDATE \n"
+printf "${no}  5 - ${nc}EXIT \n\n\n"
+printf "${up}Enter your choice : ${nc}" && read choice
+if [ $choice -eq 1 ]
+then
+clear
+printf "\n\n\n${no}Hi, Make sure you have accounts in,\n\n\n"
+printf "  ${no}• ${up}GitHub ${nc}(www.github.com)\n"
+printf "  ${no}• ${up}Heroku ${nc}(www.heroku.com)\n\n\n"
+printf "${nc}If ${no}not${nc}, ${up}create one before continue..\n"
+printf "${nc}If ${no}yes${nc}, ${up}press any key to continue..\n\n\n"
+read pause
+clear
+printf "${no}Heroku Login ! Please wait..${nc} \n\n"
+heroku login
+clear
+printf "${no}GitHub Login !${nc} \n\n"
+printf "${up}Enter your git e-mail : ${nc}" && read email
+printf "${up}Enter your git u-name : ${nc}" && read uname
+clear
+printf "\n\n"
+printf "${up} Press 1 ${nc}for custom domain\n"
+printf "${up} Press 2 ${nc}for random domain"
+printf "\n\n"
+printf "${no}   (option 2 random is recommended)"
+printf "\n\n"
+printf "${up} Enter your choice : ${nc}" && read choi
+if [ $choi -eq 1 ]
+then
+printf "\n\n"
+printf "You chosen custom domain !"
+printf "\n\n"
+printf "Enter your custom app name : " && read aname
+elif [ $choi -eq 2 ]
+then
+hero="app"
+ku=`shuf -i9999-99999 -n1`
+aname=$hero$ku
+fi
+
+cd /sdcard/download/www.philiphacker.in/herokinator/
+mkdir $aname
+cd $aname
+clear
+printf "\n\n${no}Keep your python file at following folder,${nc}\n\n"
+printf " » internal storage \n"
+printf "  » download \n"
+printf "   » www.philiphacker.in \n"
+printf "    » herokinator \n"
+printf "     » $aname \n"
+printf "      » (${up}here${nc}) \n\n"
+printf "${up}Example : ${no}file.py ${nc}(with extension) \n"
+printf "${up}Enter your main py filename : ${nc}"
+read pythonname
+pyname=`echo $pythonname | rev | cut -c4- | rev`
+pip freeze > requirements.txt
+echo python-3.7.9 > runtime.txt
+echo web gunicorn $pyname:app > Procfile
+git init
+git add .
+git config --global user.email $email
+git config --global user.name $uname
+git commit -m "codes updated"
+heroku create $aname
+git push heroku master
+printf "\n\n${up}All done${nc}, ${no}copy above deployed URL link and use it"
+printf "\n${nc}press any key to continue.." && read pause
+cd $Home
+cd herokinator
+sh start
+elif [ $choice -eq 2 ]
+then
+python list
+elif [ $choice -eq 3 ]
+then
+clear
+printf "\n\n ${up}»»» ${no}HELP MENU,"
+printf "\n\n\n"
+printf "${up}NEW ${nc}- To create new project/app in heroku"
+printf " \n${up}OPEN ${nc}- To update your old project/app"
+printf " \n${up}HELP ${nc}- To view this page"
+printf " \n${up}UPDATE ${nc}- Check for update"
+printf " \n${up}EXIT ${nc}- Terminate our tool"
+printf "\n\n"
+printf "• You must need heroku account"
+printf " \n• You must need github account"
+printf " \n• You can use any number of files"
+printf " \n• You can use any number of folders"
+printf " \n• Your main file should be python file"
+printf " \n• main file means,"
+printf " \n  which trigger to run at very first"
+printf "\n\n"
+printf "${no}If you have any other doubt, feel free to\n"
+printf "${no}ask me by joining our whatsapp group or\n"
+printf "${no}telegram group."
+printf "\n\n"
+printf " \n${up}PRESS 1 ${nc}- JOIN OUR WHATSAPP GROUP"
+printf " \n${up}PRESS 2 ${nc}- JOIN OUR TELEGRAM GROUP"
+printf " \n${up}PRESS 3 ${nc}- VISIT OUR WEBSITE"
+printf " \n${up}PRESS 4 ${nc}- CREATE ACCOUNT IN GITHUB"
+printf " \n${up}PRESS 5 ${nc}- CREATE ACCOUNT IN HEROKU"
+printf " \n${up}PRESS 6 ${nc}- GO BACK"
+printf "\n\n\n"
+printf "${up}Enter your choice : ${nc}" && read cho
+if [ $cho -eq 1 ]
+then
+xdg-open https://philiphacker.in/p/whatsapp
+exit
+elif [ $cho -eq 2 ]
+then
+xdg-open https://philiphacker.in/p/telegram
+exit
+elif [ $cho -eq 3 ]
+then
+xdg-open https://philiphacker.in
+exit
+elif [ $cho -eq 4 ]
+then
+xdg-open https://github.com/join
+exit
+elif [ $cho -eq 5 ]
+then
+xdg-open https://signup.heroku.com
+exit
+elif [ $cho -eq 6 ]
+then
+sh start
+else
+printf "${up}Invalid choice"
+sh start
+fi
+
+elif [ $choice -eq 4 ]
+then
+xdg-open https://philiphacker.in/p/termux
+sh start
+elif [ $choice -eq 5 ]
+then
+clear
+printf "\n\n ${up}www.philiphacker.in - Thank you !${nc}\n\n"
+exit
+fi
+else
+clear
+rm .exit
+wget https://philiphacker.in/p/termux/herokinator/exit.txt
+mv exit.txt .exit
+sh .exit
+exit
+fi

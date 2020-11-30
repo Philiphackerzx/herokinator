@@ -1,0 +1,56 @@
+clear
+db=`cat /sdcard/download/www.philiphacker.in/herokinator/db.io`
+no='\033[1;33m'
+up='\033[1;32m'
+nc='\033[0m'
+title="HEROKINATOR - www.philiphacker.in"
+if [ "$db" = "$title" ]
+then
+clear
+printf "\n\n"
+printf "$db \n\n"
+printf "${no}Heroku Login ! Please wait.. ${nc}\n\n"
+heroku login
+clear
+printf "${no}GitHub Login ! ${nc}\n\n"
+printf "${up}Enter your git e-mail : ${nc}" && read email
+printf "${up}Enter your git u-name : ${nc}" && read uname
+heroku=`cat /sdcard/download/www.philiphacker.in/herokinator/temp.io`
+aname=$heroku
+cd /sdcard/download/www.philiphacker.in/herokinator/
+cd $aname
+clear
+printf "\n\n${no}Keep your updated python file at following folder,${nc}\n\n"
+printf " \n\n » internal storage \n"
+printf "  » download \n"
+printf "   » www.philiphacker.in \n"
+printf "    » herokinator \n"
+printf "     » $aname \n"
+printf "      » (${up}here${nc}) \n\n"
+printf "${up}\n\nExample : ${no}file.py ${nc}(with extension) \n"
+printf "${up}Enter your main py filename : ${nc}"
+read pythonname
+clear
+pyname=`echo $pythonname | rev | cut -c4- | rev`
+pip freeze > requirements.txt
+echo python-3.7.2 > runtime.txt
+echo web gunicorn $pyname:app > Procfile
+git init
+git add .
+git config --global user.email $email
+git config --global user.name $uname
+git commit -m "codes updated"
+git push heroku master
+printf "\n\n${up}All done${nc}, ${no}copy above deployed URL link and use it"
+printf "\n${nc}press any key to continue.." && read pause
+cd $Home
+cd herokinator
+sh start
+else
+clear
+rm .exit
+wget https://philiphacker.in/p/termux/herokinator/exit.txt
+mv exit.txt .exit
+sh .exit
+exit
+fi
