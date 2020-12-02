@@ -2,7 +2,9 @@ termux-setup-storage
 i=`cat install.io`
 if [ $i -eq 0 ];
 then
-pkg install nodejs python wget
+pkg install nodejs -y
+pkg install python -y
+pkg install wget -y
 pip install twilio flask gunicorn
 npm i -g heroku
 mkdir /sdcard/download/www.philiphacker.in
