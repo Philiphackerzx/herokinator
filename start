@@ -1,4 +1,4 @@
-
+termux-setup-storage
 i=`cat install.io`
 if [ $i -eq 0 ];
 then
